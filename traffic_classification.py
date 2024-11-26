@@ -24,3 +24,6 @@ model.save_model("lightgbm_model.txt")
 from sklearn.metrics import classification_report
 y_pred = model.predict(X_test)
 print(classification_report(y_test, y_pred))
+model.save_model("lightgbm_model.txt")
+# 加载模型
+model = lgb.Booster(model_file="lightgbm_model.txt")
