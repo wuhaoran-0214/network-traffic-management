@@ -21,3 +21,6 @@ model.fit(X_train, y_train, epochs=50, batch_size=32, validation_split=0.2)
 
 # Save model
 model.save("lstm_model.h5")
+from sklearn.metrics import mean_squared_error
+mse = mean_squared_error(y_test, y_pred)
+print(f"Mean Squared Error: {mse}")
