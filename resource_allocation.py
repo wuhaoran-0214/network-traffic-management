@@ -17,3 +17,6 @@ def update_onos_flows(controller_ip, allocation_map):
         url = f"http://{controller_ip}:8181/onos/v1/flows/{flow_id}"
         data = {"bandwidth": bandwidth}
         requests.post(url, json=data, auth=("onos", "rocks"))
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.info(f"Allocated bandwidth for flow {flow_id}: {bandwidth}")
