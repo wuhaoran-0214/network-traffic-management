@@ -1,0 +1,60 @@
+{
+    "flow_1": {
+        "source_ip": "192.168.1.1",
+        "destination_ip": "192.168.1.2",
+        "protocol": "TCP",
+        "source_port": 8080,
+        "destination_port": 80,
+        "packet_size_mean": 512,
+        "packet_size_stddev": 128,
+        "duration": 15,
+        "total_packets": 300,
+        "tcp_flags": {
+            "SYN": 100,
+            "ACK": 150,
+            "FIN": 50
+        }
+    },
+    "flow_2": {
+        "source_ip": "10.0.0.1",
+        "destination_ip": "10.0.0.2",
+        "protocol": "UDP",
+        "source_port": 53,
+        "destination_port": 53,
+        "packet_size_mean": 256,
+        "packet_size_stddev": 64,
+        "duration": 30,
+        "total_packets": 400,
+        "udp_stats": {
+            "queries": 200,
+            "responses": 200
+        }
+    },
+    "flow_3": {
+        "source_ip": "172.16.0.1",
+        "destination_ip": "172.16.0.2",
+        "protocol": "ICMP",
+        "icmp_type": 8,
+        "icmp_code": 0,
+        "packet_size_mean": 128,
+        "packet_size_stddev": 32,
+        "duration": 10,
+        "total_packets": 50
+    },
+    "flow_4": {
+        "source_ip": "192.168.100.1",
+        "destination_ip": "192.168.100.2",
+        "protocol": "TCP",
+        "source_port": 22,
+        "destination_port": 22,
+        "packet_size_mean": 1024,
+        "packet_size_stddev": 256,
+        "duration": 45,
+        "total_packets": 200,
+        "tcp_flags": {
+            "SYN": 20,
+            "ACK": 170,
+            "FIN": 10
+        }
+    }
+}
