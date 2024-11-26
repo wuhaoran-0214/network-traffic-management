@@ -1,22 +1,22 @@
-def allocate_resources(flow_stats, predictions):
-    """
-    Allocate resources based on flow predictions and classifications.
-    """
-    allocation_map = {}
-    for flow in flow_stats:
-        flow_id = flow["flow_id"]
-        bandwidth = predictions.get(flow_id, 0) * flow["priority"]
-        allocation_map[flow_id] = min(bandwidth, MAX_BANDWIDTH)
-    return allocation_map
+import numpy as np
 
-def update_onos_flows(controller_ip, allocation_map):
-    """
-    Update ONOS flow rules based on allocation map
-    """
-    for flow_id, bandwidth in allocation_map.items():
-        url = f"http://{controller_ip}:8181/onos/v1/flows/{flow_id}"
-        data = {"bandwidth": bandwidth}
-        requests.post(url, json=data, auth=("onos", "rocks"))
-import logging
-logging.basicConfig(level=logging.INFO)
-logging.info(f"Allocated bandwidth for flow {flow_id}: {bandwidth}")
+# 动态资源分配策略
+def allocate_resources(flow_stats, predictions):
+    allocation = {}
+    for i, flow in enumerate(flow_stats):
+        priority = "high" if predictions[i] == 2 else "normal"
+        allocation[flow["source_ip"]] = {
+            "bandwidth": np.random.uniform(1, 10) if priority == "high" else 5,
+            "priority": priority,
+        }
+    return allocation
+
+if __name__ == "__main__":
+    # 测试动态资源分配
+    flow_stats = [
+        {"source_ip": "192.168.1.1", "destination_ip": "10.0.0.1", "packet_size": 512},
+    ]
+    predictions = [2]  # 模拟预测结果
+    allocation_map = allocate_resources(flow_stats, predictions)
+    print("Allocation Map:", allocation_map)
+
