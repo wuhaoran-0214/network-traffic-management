@@ -1,0 +1,20 @@
+{
+  "flows": [
+    {
+      "flow_id": "1",
+      "src_ip": "192.168.0.1",
+      "dst_ip": "192.168.0.2",
+      "bytes": 1048576,
+      "packets": 200,
+      "protocol": "TCP"
+    },
+    {
+      "flow_id": "2",
+      "src_ip": "192.168.0.3",
+      "dst_ip": "192.168.0.4",
+      "bytes": 524288,
+      "packets": 120,
+      "protocol": "UDP"
+    }
+  ]
+}
