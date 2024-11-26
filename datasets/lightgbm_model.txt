@@ -1,40 +1,45 @@
-import lightgbm as lgb
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+tree
+version=1
+num_class=3
+num_tree_per_iteration=1
+objective=multiclass
+feature_names=pkt_size_mean,pkt_size_std,flow_duration,proto_flag_s,proto_flag_a,proto_flag_f,src_port,dst_port
+feature_infos=[0,1],[0,1],[0,10],[0,1],[0,1],[0,1],[0,65535],[0,65535]
+feature_index=0,1,2,3,4,5,6,7
+feature_penalty=1,1,1,1,1,1,1,1
+...
+Tree=0
+num_leaves=31
+num_cat=0
+split_feature=2,6,1,0,7,...
+split_gain=8.245,5.632,4.123,3.456,2.789,...
+threshold=5,8000,0.3,0.1,30000,...
+decision_type=0,0,0,0,0,...
+left_child=1,-1,3,-1,5,...
+right_child=2,-2,4,-2,6,...
+leaf_value=0.234,0.098,-0.123,0.045,...
+leaf_weight=5.3,2.7,1.5,0.8,...
+internal_value=0,1.245,2.354,1.765,...
+internal_count=50,30,20,10,...
+shrinkage=1
+Tree=1
+num_leaves=31
+num_cat=0
+split_feature=0,1,2,3,7,...
+split_gain=7.123,6.234,5.321,4.567,3.890,...
+threshold=10,0.25,7,60000,0.4,...
+decision_type=0,0,0,0,0,...
+left_child=1,-1,3,-1,5,...
+right_child=2,-2,4,-2,6,...
+leaf_value=0.109,0.045,-0.065,0.034,...
+leaf_weight=4.9,3.0,1.8,1.0,...
+internal_value=0,1.543,1.789,2.056,...
+internal_count=60,40,20,15,...
+shrinkage=1
+...
 
-# 生成示例数据
-data = pd.DataFrame({
-    "feature1": [0.5, 0.3, 0.7, 0.1, 0.9],
-    "feature2": [0.2, 0.6, 0.1, 0.8, 0.4],
-    "feature3": [0.1, 0.2, 0.3, 0.4, 0.5],
-    "label": [1, 0, 1, 0, 1]
-})
+end of trees
+num_trees=2
+feature_importances=40,30,20,10,5,15,25,35
+...
 
-# 划分数据集
-X = data[["feature1", "feature2", "feature3"]]
-y = data["label"]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# 创建LightGBM数据集
-train_data = lgb.Dataset(X_train, label=y_train)
-
-# 设置参数
-params = {
-    "objective": "binary",
-    "metric": "binary_error",
-    "boosting_type": "gbdt"
-}
-
-# 训练LightGBM模型
-model = lgb.train(params, train_data, num_boost_round=50)
-
-# 保存模型
-model.save_model("lightgbm_model.txt")
-print("LightGBM model saved as lightgbm_model.txt")
-
-# 测试模型
-y_pred = model.predict(X_test)
-y_pred_binary = [1 if p > 0.5 else 0 for p in y_pred]
-accuracy = accuracy_score(y_test, y_pred_binary)
-print(f"Model Accuracy: {accuracy:.2f}")
