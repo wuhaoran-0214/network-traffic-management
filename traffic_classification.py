@@ -21,3 +21,6 @@ model = lgb.train(params, train_data, num_boost_round=100)
 
 # Save trained model
 model.save_model("lightgbm_model.txt")
+from sklearn.metrics import classification_report
+y_pred = model.predict(X_test)
+print(classification_report(y_test, y_pred))
