@@ -24,3 +24,5 @@ def fetch_flow_stats(controller_ip):
 # Save collected data
 df = fetch_flow_stats("127.0.0.1")
 df.to_csv("flow_stats.csv", index=False)
+if response.status_code != 200:
+    raise Exception(f"Failed to fetch flow stats: {response.status_code}")
